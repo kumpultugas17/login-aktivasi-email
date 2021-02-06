@@ -39,7 +39,7 @@
                             include 'mail.php';
 
                             if ($insert) {
-                                echo "<div class='alert alert-success'>Registrasi Anda berhasil, silahkan cek E-Mail Anda untuk aktifasi!</div>";
+                                echo "<div class='alert alert-success'>Registrasi Anda berhasil, silahkan cek E-Mail Anda untuk aktifasi! <a href=www.gmail.com><b>Klik disini!<b></a></div>";
                             }
                         }
                     }

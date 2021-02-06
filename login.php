@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
-    <title>Home</title>
+    <title>Login</title>
 </head>
 <body style="font-family: quicksand;">
 
@@ -17,6 +17,31 @@
                     <div class="card-body">
                         <h4 class="text-center"><b>LOGIN</b></h4>
                         <hr>
+                        <?php
+                        session_start();
+                        if (!empty($_SESSION['login'])) {
+                            header('Location:index.php');
+                        }
+
+                        include 'koneksi.php';
+                        if (isset($_POST['submit'])) {
+                            $email = $_POST['email'];
+                            $password = $_POST['password'];
+
+                            $query = $koneksi->query("SELECT * FROM users WHERE email='$email' AND password='$password' AND aktif='1'");
+                            $row = mysqli_fetch_array($query);
+                            $cek = mysqli_num_rows($query);
+
+                            if ($cek > 0) {
+                                $_SESSION['login'] = $row['username'];
+                                $_SESSION['username'] = $row['username'];
+                                $_SESSION['nama'] = $row['nama'];
+                                header('Location:index.php');
+                            } else {
+                                echo "<div class='alert alert-danger'>Username dan Password dalah</div>";
+                            }
+                        }
+                        ?>
                         <form action="" method="post">
                             <div class="form-group">
                                 <label for="">E-Mail</label>
